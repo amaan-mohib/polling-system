@@ -1,0 +1,34 @@
+.App {
+  min-height: 100vh;
+  display: flex;
+  text-align: center;
+  flex-direction: column;
+}
+
+.selection {
+  display: flex;
+  flex-direction: column;
+  min-height: 400px;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem;
+  margin: auto;
+  justify-content: space-around;
+}
+
+.button-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.poll {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  margin: auto;
+}
