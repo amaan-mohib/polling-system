@@ -1,0 +1,5 @@
+{"votes":{"123":1,"456":1,"wer":0},"participants":2,"total":2,"question":"ques3","correct":0,"_id":"Uloc3aTRRPWfOC4u"}
+{"votes":{"123":0,"asd":0},"participants":2,"total":2,"question":"ques2","correct":0,"_id":"i3c3K45c58X6Ygmo"}
+{"votes":{"123":1,"234":1},"participants":2,"total":2,"question":"ques1","correct":"0","_id":"wMM6LsgI9SudltdL"}
+{"votes":{"123":1,"234":0,"456":1},"participants":2,"total":2,"question":"ques1","correct":"234","_id":"NzzMo40qseAtOxhs"}
+{"votes":{"456":1,"asd":1},"participants":2,"total":2,"question":"123","correct":"asd","_id":"lCSVfqlzuOB89Tmf"}

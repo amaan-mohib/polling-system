@@ -1,7 +1,8 @@
 import { Button, TextField } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setStudentName } from "../reducers/student";
+import socket from "../utils/socket";
 import AnswerPoll from "./AnswerPoll";
 import Results from "./Results";
 
@@ -32,18 +33,34 @@ const Name = () => {
 };
 
 const Student = () => {
-  const studentName = useSelector((state) => state.student);
-  const results = useSelector((state) => state.student);
+  const { name } = useSelector((state) => state.student);
+  const { type } = useSelector((state) => state.role);
+  useEffect(() => {
+    if (name) {
+      socket.emit(
+        "join",
+        {
+          role: type,
+          user: {
+            sid: socket.id,
+            name,
+          },
+        },
+        (error) => {
+          if (error) console.error(error);
+        }
+      );
+    }
+  }, [name]);
 
-  return studentName.name ? (
-    results.results ? (
-      <Results />
-    ) : (
-      <AnswerPoll />
-    )
-  ) : (
-    <Name />
-  );
+  useEffect(() => {
+    socket.off("kick").on("kick", () => {
+      alert("You have been kicked out");
+      window.location.reload();
+    });
+  }, []);
+
+  return name ? <AnswerPoll /> : <Name />;
 };
 
 export default Student;

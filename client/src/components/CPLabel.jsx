@@ -15,7 +15,7 @@ export default function CircularProgressWithLabel(props) {
           alignItems: "center",
           justifyContent: "center",
         }}>
-        <p>{`${Math.round(props.value)}`}</p>
+        <p>{`${Math.round(props.label)}`}</p>
       </Box>
     </Box>
   );

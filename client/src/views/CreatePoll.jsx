@@ -5,26 +5,43 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import History from "../components/History";
 import NavBar from "../components/NavBar";
 import { setResults } from "../reducers/student";
+import socket from "../utils/socket";
 
 const CreatePoll = () => {
   const [options, setOptions] = useState([]);
   const [newOpt, setNewOpt] = useState("");
   const [correct, setCorrect] = useState(-1);
   const [value, setValue] = useState("");
+  const [timer, setTimer] = useState(60);
 
   const dispatch = useDispatch();
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+
+  const onSubmit = () => {
+    const question = {
+      question: value,
+      options,
+      correct: options[correct],
+      timer: parseInt(timer),
+    };
+    socket.emit("submit-question", question, (error) => {
+      if (error) console.error(error);
+    });
+  };
+
   return (
     <div>
       <NavBar title="Create Poll" />
       <div className="poll">
+        <History />
         <TextField
           id="outlined-multiline-flexible"
           label="Enter question"
@@ -86,10 +103,20 @@ const CreatePoll = () => {
           </div>
         </RadioGroup>
         <div className="flex-between">
-          <div></div>
+          <div>
+            <TextField
+              placeholder="Maximum Time (seconds)"
+              label="Maximum Time (seconds)"
+              value={timer}
+              type="number"
+              onChange={(e) => setTimer(e.target.value)}
+            />
+          </div>
           <Button
+            disabled={!value || correct === -1}
             variant="contained"
             onClick={() => {
+              onSubmit();
               dispatch(setResults(true));
             }}>
             Ask question
