@@ -113,7 +113,7 @@ const CreatePoll = () => {
             />
           </div>
           <Button
-            disabled={!value || correct === -1}
+            disabled={!value.trim() || correct === -1}
             variant="contained"
             onClick={() => {
               onSubmit();

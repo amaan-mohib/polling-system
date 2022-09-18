@@ -10,7 +10,7 @@ const Chat = () => {
   const { name } = useSelector((state) => state.student);
 
   const send = () => {
-    if (!value) return;
+    if (!value.trim()) return;
     socket.emit("message", {
       msg: value,
       name: type === "student" ? name : "Teacher",

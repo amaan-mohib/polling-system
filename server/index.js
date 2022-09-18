@@ -131,6 +131,13 @@ app.get("/history", (req, res) => {
   });
 });
 
+app.get("/participants", (req, res) => {
+  res.send({
+    students,
+    teacher,
+  });
+});
+
 server.listen(process.env.PORT || 5000, () =>
   console.log("server running at http://localhost:5000")
 );

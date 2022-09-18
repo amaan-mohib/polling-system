@@ -1,8 +1,9 @@
 import { Dialog, Fab } from "@mui/material";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setChats, setParticipants } from "../../reducers/participants";
-import socket from "../../utils/socket";
+import socket, { ENDPOINT } from "../../utils/socket";
 import ChatPopUp from "./ChatPopUp";
 
 const ChatButton = () => {
@@ -25,7 +26,11 @@ const ChatButton = () => {
     };
   }, []);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    axios.get(ENDPOINT + "/participants").then((res) => {
+      dispatch(setParticipants(res.data));
+    });
+  }, []);
 
   return (
     <div className="chat-button">
